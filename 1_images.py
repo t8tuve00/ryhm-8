@@ -31,7 +31,7 @@ while(True):
         # Tallenna kuvat imgdb-kansioon muodossa "User.[idUser].pic.jpg"
         cv2.imwrite("imgdb/User." + str(idUser) + '.' + str(pic) + ".jpg", gray[y:y+h,x:x+w])
 
-        cv2.imshow('image', img)
+        # cv2.imshow('image', img)
 
     k = cv2.waitKey(100) & 0xff
     if k == ord("q"): # keskeytä loop q:lla
