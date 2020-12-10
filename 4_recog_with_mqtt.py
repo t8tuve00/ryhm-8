@@ -16,7 +16,7 @@ GPIO.output(18,0)
 GPIO.output(27,0)
 
 def on_connect(client, userdata, flags, rc):
-    client.subscribe("recog/status")
+    client.subscribe("recog")
 
 def on_publish(client, userdata, result):
     print("  MQTT: Data published ")
@@ -83,6 +83,7 @@ try:
 
                 id, odds = recog.predict(gray[y:y+h,x:x+w])
                 if frWaited:
+                    client.connect(mqttHost, mqttPort)
                     # Tarkista todennäköisyys. 0 on 100%:sti tunnistettu.
                     if (odds < 80):
                         id = names[id]
