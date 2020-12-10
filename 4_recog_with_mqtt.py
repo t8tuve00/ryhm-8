@@ -22,7 +22,7 @@ def on_publish(client, userdata, result):
     print("  MQTT: Data published ")
 
 #MQTT-asetukset
-mqttHost = "172.20.240.116"
+mqttHost = "broker.hivemq.com"
 mqttPort = 1883
 clientName = "Raspi"
 client = mqtt.Client(clientName)
@@ -60,9 +60,8 @@ def resetIO():
     GPIO.output(27,0)
 
 print('---------------------------')
-print('Face Recognizer 3.2 running')
-print('')
-print('Exit with Ctrl-C')
+print('Face Recognizer 4.0 running\n')
+print('Press Ctrl-C to exit')
 
 try:
     while True:
@@ -101,8 +100,10 @@ try:
                         GPIO.output(5,1)
                         print('\n- Unrecognized')
                         print(f'  Prediction: {id}  {odds}')
-                        ret = client.publish("recog","unknown")
+                        ret = client.publish("recog","0")
                         msgSend = True
+                        time.sleep(2)
+                        GPIO.output(5,0)
                 
                     cv2.putText(img, str(id), (x+5,y-5), font, 1, (255,255,255), 2)
                     cv2.putText(img, str(odds), (x+5,y+h-5), font, 1, (255,255,0), 1)
@@ -118,7 +119,7 @@ try:
                         fdCounter = fdCounter + 1
         
         else:
-            if frCounter == 125:
+            if frCounter == 50:
                 GPIO.output(5,0)
                 msgSend = False
                 frCounter = 0
