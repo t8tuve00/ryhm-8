@@ -3,7 +3,7 @@ import time
 import mysql.connector
 
 def insert_data(idUser):
-    sqlcon = mysql.connector.connect(host='localhost',database='lock_info',user='t8tuve00',password='t8tuve00')
+    sqlcon = mysql.connector.connect(host='localhost',database='lock_info',user='******',password='******')
     query = "INSERT INTO Log(idLog,idUser) VALUES(NULL,%s)" %idUser
     cursor = sqlcon.cursor()
     cursor.execute(query)
